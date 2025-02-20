@@ -10,7 +10,8 @@ swc-loader和babel-loader配置差不多，rust写的，性能更好。这个作
 4. 发送交易
 5. 监听事件
 6. 查询链上数据
-
+### lucide-react
+icons图标库
 ### typechain
 自动生成合约调用代码的ts类型文件，hardhat是自带的，truffle就需要自己操作了
 
@@ -156,3 +157,72 @@ await tx.wait();
 
 ## 开发问题
 ### 1. 使用scripty执行shell脚本报错`spawn Unknown system error -8`?
+
+### 2. webpack中output的clean:true和clean-webpack-plugin插件的作用有什么区别？
+webpack 中的 `output.clean: true` 和 `clean-webpack-plugin` 插件都用于清理构建目录，但它们有一些区别和特点：
+
+1. `output.clean: true`
+
+   这是 webpack 5 引入的内置选项。
+
+   特点：
+   - 简单易用，只需在配置中添加一行
+   - 由 webpack 原生支持，不需要额外安装插件
+   - 默认只清理 `output.path` 指定的目录
+   - 性能可能比插件稍好，因为它是内置功能
+
+   限制：
+   - 功能相对基础，主要用于清理输出目录
+   - 配置选项较少，灵活性不如插件
+
+   示例：
+   ```javascript
+   module.exports = {
+     output: {
+       clean: true
+     }
+   };
+   ```
+
+2. `clean-webpack-plugin`
+
+   这是一个第三方插件，在 webpack 5 之前就广泛使用。
+
+   特点：
+   - 提供更多的配置选项和灵活性
+   - 可以清理多个目录
+   - 可以排除特定文件或文件夹
+   - 提供更详细的日志输出
+   - 可以在编译之前或之后清理
+
+   限制：
+   - 需要额外安装和导入插件
+   - 配置稍微复杂一些
+
+   示例：
+   ```javascript
+   const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+   module.exports = {
+     plugins: [
+       new CleanWebpackPlugin({
+         cleanOnceBeforeBuildPatterns: ['**/*', '!static-files*'],
+         cleanAfterEveryBuildPatterns: ['static*.*', '!static1.js'],
+         verbose: true
+       })
+     ]
+   };
+   ```
+
+选择建议：
+
+1. 如果你使用 webpack 5 或更高版本，并且只需要基本的清理功能，使用 `output.clean: true` 就足够了。
+
+2. 如果你需要更高级的清理功能，比如清理多个目录、排除特定文件、或者在特定时机清理，那么 `clean-webpack-plugin` 可能更适合。
+
+3. 在一些复杂的项目中，你甚至可能会同时使用两者，以满足不同的清理需求。
+
+总的来说，`output.clean: true` 更简单直接，而 `clean-webpack-plugin` 提供了更多的控制和灵活性。选择哪一个取决于你的具体需求和项目复杂度。
+
+## todoList
+- [ ] 封装一个error组件做错误处理
