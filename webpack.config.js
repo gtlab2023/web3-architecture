@@ -112,7 +112,7 @@ const webpackBaseConfig = {
   },
   resolve: {
     // 设置文件扩展名
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx",".json"],
     alias: {
       '@/*': resolve('src/*'),
       '@components': resolve('src/components'),

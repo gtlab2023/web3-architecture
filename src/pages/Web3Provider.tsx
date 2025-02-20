@@ -1,17 +1,21 @@
 import { WagmiProvider, createConfig, http } from "wagmi";
-import { mainnet } from "wagmi/chains";
+import { mainnet,sepolia,localhost } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 
 const config = createConfig(
   getDefaultConfig({
     // Your dApps chains
-    chains: [mainnet],
+    chains: [mainnet,sepolia,localhost],
     transports: {
       // RPC URL for each chain
       [mainnet.id]: http(
-        `https://eth-mainnet.g.alchemy.com/v2/${process.env.PUBLIC_ALCHEMY_ID}`,
+        mainnet.rpcUrls.default.http[0]
       ),
+      [sepolia.id]: http(
+        sepolia.rpcUrls.default.http[0]
+      ),
+      [localhost.id]: http("http://127.0.0.1:7545"),
     },
 
     // Required API Keys

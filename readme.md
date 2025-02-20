@@ -245,5 +245,34 @@ webpack 中的 `output.clean: true` 和 `clean-webpack-plugin` 插件都用于�
 
 总的来说，`output.clean: true` 更简单直接，而 `clean-webpack-plugin` 提供了更多的控制和灵活性。选择哪一个取决于你的具体需求和项目复杂度。
 
+### 3.连接钱包是怎么设置要连接的网络和用户呢？
+在getDefaultConfig方法中配置chains
+
+### 4.调用存钱方法时，钱包终止了我的交易，错误信息是 This transaction would have cost you extra fees, so we stopped it. Your money is still in your wallet.，似乎是gas有所限制
+调用之前可以动态评估一下gasLimit，然后增加20%的缓冲，再调用
+```tsx
+import { useEstimateGas, useContractWrite } from 'wagmi'
+
+const { data: estimatedGas } = useEstimateGas({
+  to: contractAddress,
+  data: encodeFunctionData({
+    abi: contractABI,
+    functionName: 'deposit',
+    args: [amount],
+  }),
+  value: amount,
+})
+
+const { write } = useContractWrite({
+  ...otherConfig,
+  request: {
+    ...request,
+    gasLimit: estimatedGas ? BigInt(Math.floor(Number(estimatedGas) * 1.2)) : undefined, // 增加 20% 的缓冲
+  },
+})
+
+```
 ## todoList
 - [ ] 封装一个error组件做错误处理
+- [ ] 通过etherscan获取合约信息和abi
+- [ ] 优化合约交互的体验，比如刷新和事件的监控处理 

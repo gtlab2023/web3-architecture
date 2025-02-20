@@ -32,7 +32,7 @@ const Header: React.FC = () => {
           </nav>
 
           {/* 右侧钱包连接按钮 */}
-          <ConnectKitButton></ConnectKitButton>
+          <ConnectKitButton showBalance={true}></ConnectKitButton>
           {/* <button
             onClick={handleConnectWallet}
             className={`flex items-center px-4 py-2 rounded-full transition duration-150 ease-in-out ${
