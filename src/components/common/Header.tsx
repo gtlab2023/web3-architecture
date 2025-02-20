@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Grid, Wallet } from 'lucide-react';
-
+import { ConnectKitButton } from "connectkit";
 const Header: React.FC = () => {
   const [isConnected, setIsConnected] = useState(false);
 
@@ -32,7 +32,8 @@ const Header: React.FC = () => {
           </nav>
 
           {/* 右侧钱包连接按钮 */}
-          <button
+          <ConnectKitButton></ConnectKitButton>
+          {/* <button
             onClick={handleConnectWallet}
             className={`flex items-center px-4 py-2 rounded-full transition duration-150 ease-in-out ${
               isConnected
@@ -42,7 +43,7 @@ const Header: React.FC = () => {
           >
             <Wallet className="w-5 h-5 mr-2" />
             {isConnected ? 'Connected' : 'Connect Wallet'}
-          </button>
+          </button> */}
         </div>
       </div>
     </header>

@@ -9,6 +9,14 @@ const _isProd = _mode === "production" ? true:false;
 const _mergeConfig = require(`./config/webpack.${_mode}.js`);
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ThemedProgressPlugin } = require('themed-progress-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+// 调用 dotenv 并且配置路径
+const env = dotenv.config().parsed;
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 const webpackBaseConfig = {
   // 入口文件路径
   entry: resolve("src/index.tsx"),
@@ -32,6 +40,7 @@ const webpackBaseConfig = {
       ignoreOrder: false,
     }),
     new ThemedProgressPlugin(),
+    new webpack.DefinePlugin(envKeys)
     // 生成Service Worker用于PWA
     // new GenerateSW({
     //   // 使新版本的Service Worker立即获取控制权

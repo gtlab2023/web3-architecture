@@ -18,6 +18,7 @@
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
     "css-loader": "^7.1.2",
+    "dotenv": "^16.4.7",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^29.7.0",
     "mini-css-extract-plugin": "^2.9.2",
@@ -36,6 +37,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.66.7",
     "connectkit": "^1.8.2",
     "ethers": "^6.13.5",
     "lucide-react": "^0.475.0",
