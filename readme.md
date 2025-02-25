@@ -275,4 +275,6 @@ const { write } = useContractWrite({
 ## todoList
 - [ ] 封装一个error组件做错误处理
 - [ ] 通过etherscan获取合约信息和abi
-- [ ] 优化合约交互的体验，比如刷新和事件的监控处理 
+- [ ] 优化合约交互的体验，比如刷新和事件的监控处理
+- [ ] 补充线上环境webpack配置
+- [ ] 通过连接git仓库部署

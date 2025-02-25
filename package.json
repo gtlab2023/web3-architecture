@@ -9,7 +9,7 @@
     "client:prod": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "gaotian",
   "license": "ISC",
   "devDependencies": {
     "@soda/friendly-errors-webpack-plugin": "^1.8.1",
