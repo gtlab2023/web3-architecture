@@ -1,3 +1,4 @@
 node_modules
 .env
 dist
+backstop_data/bitmaps_test

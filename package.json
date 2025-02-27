@@ -6,7 +6,8 @@
   "scripts": {
     "client:dev": "webpack --mode development",
     "client:server": "webpack serve --mode development",
-    "client:prod": "webpack --mode production"
+    "client:prod": "webpack --mode production",
+    "test:ui": "backstop test"
   },
   "keywords": [],
   "author": "gaotian",
@@ -17,6 +18,7 @@
     "@tailwindcss/postcss": "^4.0.7",
     "@types/jest": "^29.5.14",
     "@types/react": "^19.0.10",
+    "backstopjs": "^6.3.25",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.7",
     "html-webpack-plugin": "^5.6.3",
