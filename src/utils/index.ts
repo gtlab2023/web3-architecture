@@ -1,35 +1,32 @@
-// 定义钱包地址格式化的类型
-export interface FormatWalletAddressOptions {
-  prefixLength?: number; // 显示地址前缀的长度
-  suffixLength?: number; // 显示地址后缀的长度
-  separator?: string;    // 用于分隔显示前后缀的字符
-}
-
-// 格式化钱包地址的函数
-export function formatWalletAddress(
+import { MetaMask } from '@web3-react/metamask';
+import type { Connector } from '@web3-react/types';
+export const formatWalletAddress = (
   address: string,
-  options: FormatWalletAddressOptions = {}
-): string {
-  const {
-    prefixLength = 6,
-    suffixLength = 4,
-    separator = '...'
-  } = options;
+  startLength: number = 6,
+  endLength: number = 4,
+): string => {
+  if (!address) return '';
 
-  // 检查地址长度是否足够
-  if (address.length <= prefixLength + suffixLength) {
+  // 检查地址长度是否足够进行格式化
+  if (address.length <= startLength + endLength) {
     return address;
   }
 
-  // 获取前缀和后缀
-  const prefix = address.substring(0, prefixLength);
-  const suffix = address.substring(address.length - suffixLength);
+  // 移除可能的前缀
+  const cleanAddress = address.startsWith('0x') ? address.slice(2) : address;
 
-  // 返回格式化后的地址
-  return `${prefix}${separator}${suffix}`;
+  // 获取起始和结束部分
+  const start = cleanAddress.slice(0, startLength);
+  const end = cleanAddress.slice(-endLength);
+
+  // 如果原地址有0x前缀，添加回去
+  const prefix = address.startsWith('0x') ? '0x' : '';
+
+  return `${prefix}${start}...${end}`;
+};
+
+// 获取连接器名称
+export function getName(connector: Connector) {
+  if (connector instanceof MetaMask) return 'MetaMask';
+  return 'Unknown';
 }
-
-// 使用示例
-const originalAddress = '0x1234567890abcdef1234567890abcdef12345678';
-const formattedAddress = formatWalletAddress(originalAddress);
-console.log(formattedAddress); // 输出: 0x123456...f12345678
