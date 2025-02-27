@@ -1,0 +1,149 @@
+{
+  "numFailedTestSuites": 1,
+  "numFailedTests": 1,
+  "numPassedTestSuites": 0,
+  "numPassedTests": 4,
+  "numPendingTestSuites": 0,
+  "numPendingTests": 0,
+  "numRuntimeErrorTestSuites": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 1,
+  "numTotalTests": 5,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1740660887730,
+  "success": false,
+  "testResults": [
+    {
+      "leaks": false,
+      "numFailingTests": 1,
+      "numPassingTests": 4,
+      "numPendingTests": 0,
+      "numTodoTests": 0,
+      "openHandles": [],
+      "perfStats": {
+        "end": 1740660887975,
+        "runtime": 173,
+        "slow": false,
+        "start": 1740660887802
+      },
+      "skipped": false,
+      "snapshot": {
+        "added": 0,
+        "fileDeleted": false,
+        "matched": 0,
+        "unchecked": 0,
+        "uncheckedKeys": [],
+        "unmatched": 0,
+        "updated": 0
+      },
+      "testFilePath": "/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/tests/units/index.spec.ts",
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "formatWalletAddress"
+          ],
+          "duration": 6,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "formatWalletAddress formats address correctly with default parameters",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "formats address correctly with default parameters"
+        },
+        {
+          "ancestorTitles": [
+            "formatWalletAddress"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "formatWalletAddress formats address correctly with custom parameters",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "formats address correctly with custom parameters"
+        },
+        {
+          "ancestorTitles": [
+            "formatWalletAddress"
+          ],
+          "duration": 0,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "formatWalletAddress returns empty string for null or undefined address",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 3,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "returns empty string for null or undefined address"
+        },
+        {
+          "ancestorTitles": [
+            "formatWalletAddress"
+          ],
+          "duration": 0,
+          "failureDetails": [
+            {
+              "matcherResult": {
+                "actual": "0x123456...7890",
+                "expected": "0x1234567890",
+                "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"0x1234567890\"\u001b[39m\nReceived: \u001b[31m\"0x123456\u001b[7m...\u001b[27m7890\"\u001b[39m",
+                "name": "toBe",
+                "pass": false
+              }
+            }
+          ],
+          "failureMessages": [
+            "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"0x1234567890\"\u001b[39m\nReceived: \u001b[31m\"0x123456\u001b[7m...\u001b[27m7890\"\u001b[39m\n    at Object.<anonymous> (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/tests/units/index.spec.ts:26:21)\n    at Promise.then.completed (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/utils.js:298:28)\n    at new Promise (<anonymous>)\n    at callAsyncCircusFn (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/utils.js:231:10)\n    at _callCircusTest (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/run.js:316:40)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at _runTest (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/run.js:252:3)\n    at _runTestsForDescribeBlock (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/run.js:148:7)\n    at _runTestsForDescribeBlock (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/run.js:121:9)\n    at run (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/run.js:71:3)\n    at runAndTransformResultsToJestFormat (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)\n    at jestAdapter (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)\n    at runTestInternal (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-runner/build/runTest.js:367:16)\n    at runTest (/Users/gaotian/Documents/blog/前端秘籍/前端架构/实践/gt-web3-spa/node_modules/jest-runner/build/runTest.js:444:34)"
+          ],
+          "fullName": "formatWalletAddress returns full address if it's shorter than start + end length",
+          "invocations": 2,
+          "location": null,
+          "numPassingAsserts": 0,
+          "retryReasons": [],
+          "status": "failed",
+          "title": "returns full address if it's shorter than start + end length"
+        },
+        {
+          "ancestorTitles": [
+            "formatWalletAddress"
+          ],
+          "duration": 1,
+          "failureDetails": [],
+          "failureMessages": [],
+          "fullName": "formatWalletAddress handles addresses without 0x prefix",
+          "invocations": 1,
+          "location": null,
+          "numPassingAsserts": 1,
+          "retryReasons": [],
+          "status": "passed",
+          "title": "handles addresses without 0x prefix"
+        }
+      ],
+      "failureMessage": "\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mformatWalletAddress › returns full address if it's shorter than start + end length\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\n    Expected: \u001b[32m\"0x1234567890\"\u001b[39m\n    Received: \u001b[31m\"0x123456\u001b[7m...\u001b[27m7890\"\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m 24 |\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 25 |\u001b[39m   test(\u001b[32m'handles addresses without 0x prefix'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\u001b[22m\n\u001b[2m    \u001b[31m\u001b[1m>\u001b[22m\u001b[2m\u001b[39m\u001b[90m 26 |\u001b[39m     \u001b[36mconst\u001b[39m address \u001b[33m=\u001b[39m \u001b[32m'1234567890123456789012345678901234567890'\u001b[39m\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m    |\u001b[39m                     \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 27 |\u001b[39m     expect(formatWalletAddress(address))\u001b[33m.\u001b[39mtoBe(\u001b[32m'123456...7890'\u001b[39m)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 28 |\u001b[39m   })\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 29 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.<anonymous> (\u001b[22m\u001b[2m\u001b[0m\u001b[36mtests/units/index.spec.ts\u001b[39m\u001b[0m\u001b[2m:26:21)\u001b[22m\u001b[2m\u001b[22m\n"
+    }
+  ],
+  "wasInterrupted": false
+}

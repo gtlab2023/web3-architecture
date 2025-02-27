@@ -1,34 +1,31 @@
-import { formatWalletAddress,FormatWalletAddressOptions } from '../../src/utils/index.ts'; // 确保路径正确
+import { formatWalletAddress } from '@utils/index';
 
 describe('formatWalletAddress', () => {
-  it('should format the address with default options', () => {
-    const address = '0x1234567890abcdef1234567890abcdef12345678';
-    const formatted = formatWalletAddress(address);
-    expect(formatted).toBe('0x123456...f12345678');
+  test('formats address correctly with default parameters', () => {
+    const address = '0x1234567890123456789012345678901234567890';
+    expect(formatWalletAddress(address)).toBe('0x123456...7890');
   });
 
-  it('should format the address with custom options', () => {
-    const address = '0x1234567890abcdef1234567890abcdef12345678';
-    const options: FormatWalletAddressOptions = {
-      prefixLength: 8,
-      suffixLength: 6,
-      separator: '****'
-    };
-    const formatted = formatWalletAddress(address, options);
-    expect(formatted).toBe('0x12345678****f123456');
+  test('formats address correctly with custom parameters', () => {
+    const address = '0x1234567890123456789012345678901234567890';
+    expect(formatWalletAddress(address, 4, 6)).toBe('0x1234...567890');
   });
 
-  it('should return the original address if it is too short', () => {
-    const address = '0x1234';
-    const formatted = formatWalletAddress(address);
-    expect(formatted).toBe(address);
+  test('returns empty string for null or undefined address', () => {
+    expect(formatWalletAddress('')).toBe('');
+    expect(formatWalletAddress(null)).toBe('');
+    expect(formatWalletAddress(undefined)).toBe('');
   });
 
-  it('should handle empty address', () => {
-    const address = '';
-    const formatted = formatWalletAddress(address);
-    expect(formatted).toBe('');
+  test('returns full address if it\'s shorter than start + end length', () => {
+    const shortAddress = '0x1234567890';
+    expect(formatWalletAddress(shortAddress)).toBe('0x1234567890');
   });
 
-  // 添加更多的测试用例来覆盖不同的边界情况和错误处理
+  test('handles addresses without 0x prefix', () => {
+    const address = '1234567890123456789012345678901234567890';
+    expect(formatWalletAddress(address)).toBe('123456...7890');
+  });
 });
+
+
