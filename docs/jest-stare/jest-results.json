@@ -26,7 +26,7 @@
     "unmatched": 0,
     "updated": 0
   },
-  "startTime": 1740660887730,
+  "startTime": 1740662175761,
   "success": false,
   "testResults": [
     {
@@ -37,10 +37,10 @@
       "numTodoTests": 0,
       "openHandles": [],
       "perfStats": {
-        "end": 1740660887975,
-        "runtime": 173,
+        "end": 1740662176016,
+        "runtime": 179,
         "slow": false,
-        "start": 1740660887802
+        "start": 1740662175837
       },
       "skipped": false,
       "snapshot": {
@@ -103,7 +103,7 @@
           "ancestorTitles": [
             "formatWalletAddress"
           ],
-          "duration": 0,
+          "duration": 1,
           "failureDetails": [
             {
               "matcherResult": {

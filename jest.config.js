@@ -1,12 +1,12 @@
 module.exports = {
-  testMatch: ['**/?(*.)(spec|test).ts?(x)'],
-  setupFilesAfterEnv: ['<rootDir>/tests/setupTests.ts'], //  在环境设置之后运行的文件，用于配置测试环境
-  rootDir: '.',
+  testMatch: ["**/?(*.)(spec|test).ts?(x)"],
+  setupFilesAfterEnv: ["<rootDir>/tests/setupTests.ts"], //  在环境设置之后运行的文件，用于配置测试环境
+  rootDir: ".",
   transform: {
-    '.(ts|tsx)': '@swc/jest',
+    ".(ts|tsx)": "@swc/jest",
   },
   moduleNameMapper: {
-    '^@utils(.*)$': '<rootDir>/src/utils$1',
+    "^@utils(.*)$": "<rootDir>/src/utils$1",
   },
   coverageThreshold: {
     global: {
@@ -18,7 +18,17 @@ module.exports = {
   },
   watchAll: false,
   collectCoverage: true,
-  coverageDirectory: './docs/jest-coverage',
-  coveragePathIgnorePatterns: ['/node_modules/', '/tests/'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx', 'node'],
+  coverageDirectory: "./docs/jest-coverage",
+  coveragePathIgnorePatterns: ["/node_modules/", "/tests/"],
+  moduleFileExtensions: ["ts", "tsx", "js", "json", "jsx", "node"],
+  reporters: [
+    "default",
+    [
+      "jest-stare",
+      {
+        coverageLink: "../jest-coverage/lcov-report/index.html",
+        resultDir: "docs/jest-stare",
+      },
+    ],
+  ],
 };

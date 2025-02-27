@@ -8,11 +8,7 @@
     "client:server": "webpack serve --mode development",
     "client:prod": "webpack --mode production",
     "test:ui": "backstop test",
-    "test:unit": "jest --collectCoverage --reporters default jest-stare"
-  },
-  "jest-stare": {
-    "coverageLink": "../jest-coverage/lcov-report/index.html",
-    "resultDir": "docs/jest-stare"
+    "test:unit": "jest --coverage"
   },
   "keywords": [],
   "author": "gaotian",
