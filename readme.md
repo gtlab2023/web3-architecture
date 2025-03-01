@@ -271,6 +271,18 @@ const { write } = useContractWrite({
   },
 })
 
+## 状态库
+主要分为两种：
+1. 组件内状态(它的变换会触发组件的重新渲染，不能写在if和函数)
+  - mobx(简化redux流程，组件上面多一层闭包，容易产生内存泄漏)
+  - useReducer
+  - content.provider 不用引用三方库，但是会有嵌套
+  - jotai 可以聚合其他状态库，但是需要手动管理，原子化
+2. 组件外状态(不能驱动状态更新，可以写在if里)
+  - redux 生态比较丰富，维护成本大，上手难度高，中心化(所有状态写在一起，不利于其他状态更新)
+  - zustand
+有限状态机 xstate
+
 ```
 ## todoList
 - [ ] 替换为web3-react库

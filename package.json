@@ -10,7 +10,7 @@
     "test:ui": "backstop test",
     "test:unit": "jest --coverage",
     "test:e2e": "cypress open",
-    "test:majestic":"majestic"
+    "test:majestic": "majestic"
   },
   "keywords": [],
   "author": "gaotian",
@@ -54,6 +54,7 @@
     "@web3-react/core": "^8.2.3",
     "@web3-react/metamask": "^8.2.4",
     "ethers": "^5",
+    "immer": "^10.1.1",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
