@@ -29,7 +29,6 @@ const webpackBaseConfig = {
     clean: true,
   },
   plugins: [
-
     new MiniCssExtractPlugin({
       filename: _isProd
         ? 'styles/[name].[contenthash:5].css'
@@ -129,6 +128,6 @@ const webpackBaseConfig = {
       '@abis': resolve('src/abis'),
       '@types': resolve('src/types'),
     },
-  }
+  },
 };
 module.exports = merge(webpackBaseConfig, _mergeConfig);
