@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Wallet, Home } from 'lucide-react';
-import {hooks} from '@connections/metaMask'
+import { hooks } from '@connections/metaMask';
 const Header = () => {
-  const {useIsActive} = hooks;
+  const { useIsActive } = hooks;
   const isActive = useIsActive();
 
   const handleConnectWallet = () => {
     // 这里添加实际的钱包连接逻辑
-
   };
 
   return (

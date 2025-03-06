@@ -7,14 +7,10 @@ const NotFound: React.FC = () => {
         <div>
           <h1 className="text-9xl font-extrabold text-blue-600">404</h1>
           <h2 className="mt-4 text-4xl font-bold text-gray-900">页面未找到</h2>
-          <p className="mt-2 text-lg text-gray-600">
-            抱歉，我们似乎无法找到您要查找的页面。
-          </p>
+          <p className="mt-2 text-lg text-gray-600">抱歉，我们似乎无法找到您要查找的页面。</p>
         </div>
 
-        <div className="mt-8">
-          
-        </div>
+        <div className="mt-8"></div>
 
         <div className="mt-8">
           <Link

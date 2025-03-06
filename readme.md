@@ -36,6 +36,8 @@ icons图标库
 10. 状态管理：
 可以作为全局状态管理解决方案的替代或补充。
 
+### @weblldone-softwrare/why-did-you-render
+React组件性能优化工具，可以检测组件是否不必要的渲染，并给出具体的渲染原因。
 ## ether连接钱包并调用合约
 1. 获取合约的abi信息
 2.链接钱包
@@ -270,6 +272,7 @@ const { write } = useContractWrite({
     gasLimit: estimatedGas ? BigInt(Math.floor(Number(estimatedGas) * 1.2)) : undefined, // 增加 20% 的缓冲
   },
 })
+### 5.为什么要用useImmer
 
 ## 状态库
 主要分为两种：

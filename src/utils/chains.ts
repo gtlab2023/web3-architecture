@@ -17,19 +17,15 @@ interface ExtendedChainInformation extends BasicChainInformation {
 }
 
 function isExtendedChainInformation(
-  chainInformation: BasicChainInformation | ExtendedChainInformation
+  chainInformation: BasicChainInformation | ExtendedChainInformation,
 ): chainInformation is ExtendedChainInformation {
   return !!(chainInformation as ExtendedChainInformation).nativeCurrency;
 }
 
 const getInfuraUrlFor = (network: string) =>
-  process.env.infuraKey
-    ? `https://${network}.infura.io/v3/${process.env.infuraKey}`
-    : '';
+  process.env.infuraKey ? `https://${network}.infura.io/v3/${process.env.infuraKey}` : '';
 const getAlchemyUrlFor = (network: string) =>
-  process.env.alchemyKey
-    ? `https://${network}.alchemyapi.io/v2/${process.env.alchemyKey}`
-    : '';
+  process.env.alchemyKey ? `https://${network}.alchemyapi.io/v2/${process.env.alchemyKey}` : '';
 
 type ChainConfig = {
   [chainId: number]: BasicChainInformation | ExtendedChainInformation;
@@ -45,19 +41,13 @@ export const MAINNET_CHAINS: ChainConfig = {
     name: 'Mainnet',
   },
   10: {
-    urls: [
-      getInfuraUrlFor('optimism-mainnet'),
-      'https://mainnet.optimism.io',
-    ].filter(Boolean),
+    urls: [getInfuraUrlFor('optimism-mainnet'), 'https://mainnet.optimism.io'].filter(Boolean),
     name: 'Optimism',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://optimistic.etherscan.io'],
   },
   42161: {
-    urls: [
-      getInfuraUrlFor('arbitrum-mainnet'),
-      'https://arb1.arbitrum.io/rpc',
-    ].filter(Boolean),
+    urls: [getInfuraUrlFor('arbitrum-mainnet'), 'https://arb1.arbitrum.io/rpc'].filter(Boolean),
     name: 'Arbitrum One',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://arbiscan.io'],
@@ -75,22 +65,24 @@ export const TESTNET_CHAINS: ChainConfig = {
     name: 'Location',
   },
   420: {
-    urls: [
-      getInfuraUrlFor('optimism-goerli'),
-      'https://goerli.optimism.io',
-    ].filter(Boolean),
+    urls: [getInfuraUrlFor('optimism-goerli'), 'https://goerli.optimism.io'].filter(Boolean),
     name: 'Optimism Goerli',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://goerli-explorer.optimism.io'],
   },
   421613: {
-    urls: [
-      getInfuraUrlFor('arbitrum-goerli'),
-      'https://goerli-rollup.arbitrum.io/rpc',
-    ].filter(Boolean),
+    urls: [getInfuraUrlFor('arbitrum-goerli'), 'https://goerli-rollup.arbitrum.io/rpc'].filter(
+      Boolean,
+    ),
     name: 'Arbitrum Goerli',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://testnet.arbiscan.io'],
+  },
+  11155111: {
+    name: 'Sepolia',
+    urls: ['https://sepolia.infura.io/v3'],
+    nativeCurrency: ETH,
+    blockExplorerUrls: ['https://sepolia.etherscan.io'],
   },
 };
 
@@ -99,9 +91,7 @@ export const CHAINS: ChainConfig = {
   ...TESTNET_CHAINS,
 };
 
-export const URLS: { [chainId: number]: string[] } = Object.keys(
-  CHAINS
-).reduce<{
+export const URLS: { [chainId: number]: string[] } = Object.keys(CHAINS).reduce<{
   [chainId: number]: string[];
 }>((accumulator, chainId) => {
   const validURLs: string[] = CHAINS[Number(chainId)].urls;
@@ -112,9 +102,7 @@ export const URLS: { [chainId: number]: string[] } = Object.keys(
 
   return accumulator;
 }, {});
-export function getAddChainParameters(
-  chainId: number
-): AddEthereumChainParameter | number {
+export function getAddChainParameters(chainId: number): AddEthereumChainParameter | number {
   const chainInformation = CHAINS[chainId];
   if (isExtendedChainInformation(chainInformation)) {
     return {

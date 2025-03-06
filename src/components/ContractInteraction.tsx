@@ -3,10 +3,9 @@ import { ethers } from 'ethers';
 import { hooks } from '@/connections/metaMask';
 import { BigNumber } from '@ethersproject/bignumber';
 import { BankSol, BankSol__factory } from '@/types/ethers-contracts';
-import { CONTRACT_ADDRESS } from "@utils/contract";
-import { toast } from 'react-hot-toast';
+import { CONTRACT_ADDRESS } from '@utils/contract';
 
-export default function ContractInteraction() {
+function ContractInteraction() {
   const { useProvider, useAccounts, useIsActive } = hooks;
   const isActive = useIsActive();
   const accounts = useAccounts();
@@ -14,25 +13,34 @@ export default function ContractInteraction() {
   const provider = useProvider();
   const { parseEther, formatEther } = ethers.utils;
   const [contract, setContract] = useState<BankSol | null>(null);
-  const [depositAmount, setDepositAmount] = useState("");
-  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [depositAmount, setDepositAmount] = useState('');
+  const [withdrawAmount, setWithdrawAmount] = useState('');
   const [annualRate, setAnnualRate] = useState<BigNumber>(BigNumber.from(0));
-  const [totalBalance, setTotalBalance] = useState(BigInt(0));
-  const [contractBalance, setContractBalance] = useState(BigInt(0));
+  const [totalBalance, setTotalBalance] = useState(BigNumber.from(0));
+  const [contractBalance, setContractBalance] = useState(BigNumber.from(0));
 
-  const useReadContract = (args: { functionName: string, [key: string]: any }) => {
-    return (async (config: { functionName: string, [key: string]: any }) => {
-      if (!contract) return;
-      const { functionName, ...params } = config;
-      const data = await contract?.[functionName](params);
-      console.log(123,functionName,data)
-      return data;
-    }).bind({}, args);
+  const fetchRate = async () => {
+    if (!contract) {
+      return;
+    }
+    const data = await contract?.ANNUAL_INTEREST_RATE();
+    setAnnualRate(data);
   };
 
-  const fetchRate = useReadContract({ functionName: "ANNUAL_INTEREST_RATE" });
-  const fetchTotalBalance = useReadContract({ functionName: "getTotalBalance" });
-  const fetchContractBalance = useReadContract({ functionName: "getContractBalance" });
+  const fetchTotalBalance = async () => {
+    if (!contract || !account) {
+      return;
+    }
+    const data = await contract.getTotalBalance(account);
+    setTotalBalance(data);
+  };
+  const fetchContractBalance = async () => {
+    if (!contract) {
+      return;
+    }
+    const data = await contract.getContractBalance();
+    setContractBalance(data);
+  };
 
   useEffect(() => {
     if (provider && account) {
@@ -50,42 +58,51 @@ export default function ContractInteraction() {
     }
   }, [provider, account]);
 
+  const getReeadInfo = () => {
+    fetchRate();
+    fetchTotalBalance();
+    fetchContractBalance();
+  };
   useEffect(() => {
     if (contract) {
-      fetchRate().then((data) => setAnnualRate(data));
-      fetchTotalBalance().then((data) => setTotalBalance(data));
-      fetchContractBalance().then((data) => setContractBalance(data));
+      getReeadInfo();
     }
   }, [contract]);
 
-  const writeContractAsync = async (config: { functionName: string, args?: any, value?: any }) => {
+  const writeContractAsync = async (config: { functionName: string; value?: any }) => {
     if (!contract) return;
-    const tx = await contract?.[config.functionName](...config.args, { value: config.value });
-    await tx.wait();
+    let tx: ethers.ContractTransaction;
+    switch (config.functionName) {
+      case 'deposit':
+        tx = await contract.deposit({ value: config.value, from: account });
+        tx.wait();
+        break;
+      case 'withdraw':
+        tx = await contract.withdraw(config.value, { from: account });
+        tx.wait();
+        break;
+      case 'withdrawAll':
+        await contract.withdrawAll();
+        break;
+    }
   };
 
   const handleTransaction = async (txConfig: any) => {
     try {
-      await toast.promise(
-        writeContractAsync({
-          ...txConfig,
-          value: txConfig.value ? txConfig.value : undefined,
-        }),
-        {
-          loading: "交易处理中...",
-          success: "交易成功！",
-          error: (err) => `交易失败: ${err.shortMessage}`,
-        }
-      );
+      await writeContractAsync({
+        ...txConfig,
+        value: txConfig.value ? txConfig.value : undefined,
+      });
+
       await fetchTotalBalance();
       await fetchContractBalance();
-      if (txConfig.functionName === "deposit") {
-        setDepositAmount("");
+      if (txConfig.functionName === 'deposit') {
+        setDepositAmount('');
       } else {
-        setWithdrawAmount("");
+        setWithdrawAmount('');
       }
     } catch (error) {
-      console.error("Transaction error:", error);
+      console.error('Transaction error:', error);
     }
   };
 
@@ -101,17 +118,17 @@ export default function ContractInteraction() {
             <div className="space-y-2">
               <p className="flex items-center">
                 <span className="bg-blue-100 p-2 rounded-lg mr-2">📈</span>
-                年利率: {annualRate ? `${annualRate.toNumber() / 100}%` : "--"}
+                年利率: {annualRate ? `${annualRate.toNumber() / 100}%` : '--'}
               </p>
               <p className="flex items-center">
                 <span className="bg-green-100 p-2 rounded-lg mr-2">💰</span>
-                合约余额: {contractBalance ? formatEther(contractBalance) : "0"} ETH
+                合约余额: {contractBalance ? formatEther(contractBalance) : '0'} ETH
               </p>
             </div>
             {isActive && (
               <div className="border-l pl-4">
                 <p className="text-lg font-medium text-purple-600">
-                  我的余额: {totalBalance ? formatEther(totalBalance) : "0"} ETH
+                  我的余额: {totalBalance ? formatEther(totalBalance) : '0'} ETH
                 </p>
               </div>
             )}
@@ -125,21 +142,21 @@ export default function ContractInteraction() {
                 <input
                   type="number"
                   value={depositAmount}
-                  onChange={(e) => setDepositAmount(e.target.value)}
+                  onChange={e => setDepositAmount(e.target.value)}
                   placeholder="输入ETH数量"
                   className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
                 />
                 <button
                   onClick={() =>
                     handleTransaction({
-                      functionName: "deposit",
+                      functionName: 'deposit',
                       value: parseEther(depositAmount),
                     })
                   }
                   disabled={!depositAmount}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="cursor-pointer px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
-                  {"立即存入"}
+                  {'立即存入'}
                 </button>
               </div>
             </div>
@@ -150,30 +167,30 @@ export default function ContractInteraction() {
                   <input
                     type="number"
                     value={withdrawAmount}
-                    onChange={(e) => setWithdrawAmount(e.target.value)}
+                    onChange={e => setWithdrawAmount(e.target.value)}
                     placeholder="输入ETH数量"
                     className="flex-1 p-3 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none"
                   />
                   <button
                     onClick={() =>
                       handleTransaction({
-                        functionName: "withdraw",
-                        args: [parseEther(withdrawAmount)],
+                        functionName: 'withdraw',
+                        value: parseEther(withdrawAmount),
                       })
                     }
                     disabled={!withdrawAmount}
-                    className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    className="cursor-pointer px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
-                    {"普通提款"}
+                    {'普通提款'}
                   </button>
                 </div>
                 <button
                   onClick={() =>
                     handleTransaction({
-                      functionName: "withdrawAll",
+                      functionName: 'withdrawAll',
                     })
                   }
-                  className="w-full py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="cursor-pointer w-full py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   一键全提
                 </button>
@@ -185,3 +202,5 @@ export default function ContractInteraction() {
     </div>
   );
 }
+
+export default ContractInteraction;

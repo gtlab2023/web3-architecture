@@ -1,7 +1,6 @@
 import { MetaMask } from '@web3-react/metamask';
 import type { Connector } from '@web3-react/types';
 
-
 export const formatWalletAddress = (
   address: string,
   startLength: number = 6,

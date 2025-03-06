@@ -1,5 +1,5 @@
-import MetaMaskCard from "@/components/commanCardss/MetaMaskCard";
-import ContractInteraction from "@/components/ContractInteraction";
+import MetaMaskCard from '@/components/commanCardss/MetaMaskCard';
+import ContractInteraction from '@/components/ContractInteraction';
 const DappTest = () => {
   return (
     <>

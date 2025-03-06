@@ -15,6 +15,7 @@ module.exports = {
     hot: true,
     port,
   },
+  devtool:'eval-source-map',
   stats: "errors-only",
   optimization: {
     runtimeChunk: {
